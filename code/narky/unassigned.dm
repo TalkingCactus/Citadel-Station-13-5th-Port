@@ -203,6 +203,7 @@ var/const/VORE_SIZEDIFF_ANY=5
 					owner.stomach_contents.Remove(M)
 					contents.Remove(M)
 					qdel(M)
+					owner.nutrition+=400
 					digestion_count+=1
 					//owner.updateappearance
 					owner.update_body()
@@ -2094,6 +2095,10 @@ var/list/traitor_test_list = null
 /mob/proc/kpcode_mob_offset()
 	return
 /mob/proc/update_body()
+	if(istype(src,/mob/living/carbon))
+		//updateappearance(mutcolor_update=0)
+		src.update_body()
+
 	if(istype(src,/mob/living/carbon))
 		//updateappearance(mutcolor_update=0)
 		src.update_body()

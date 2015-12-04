@@ -225,6 +225,10 @@
 
 	var/list/standing	= list()
 
+	if(id!="human")
+		standing += generate_colour_icon('icons/mob/human.dmi',"[H.base_icon_state]_s",H.dna.special_color,add_layer=-BODY_LAYER,overlay_only=1)
+
+
 	handle_mutant_bodyparts(H)
 
 	// lipstick
@@ -969,6 +973,14 @@
 					atk_verb = "kick"
 
 				var/damage = rand(0, 9) + M.dna.species.punchmod
+
+				if(H.stat==DEAD && damage >= 4)
+					if(H.stomach_contents.len)
+						for(var/mob/A in H.stomach_contents)
+							A.loc=H.loc
+						for(var/obj/A in H.stomach_contents)
+							A.loc=H.loc
+						H.visible_message("<span class='warning'>[H] spews!</span>")
 
 				if(!damage)
 					playsound(H.loc, M.dna.species.miss_sound, 25, 1, -1)
