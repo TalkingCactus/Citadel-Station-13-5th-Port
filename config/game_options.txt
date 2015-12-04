@@ -161,7 +161,7 @@ TRAITOR_OBJECTIVES_AMOUNT 2
 
 ## Uncomment to prohibit jobs that start with loyalty
 ## implants from being most antagonists.
-#PROTECT_ROLES_FROM_ANTAGONIST
+PROTECT_ROLES_FROM_ANTAGONIST
 
 ## Uncomment to prohibit assistants from becoming most antagonists.
 #PROTECT_ASSISTANT_FROM_ANTAGONIST
@@ -215,7 +215,7 @@ MINIMAL_ACCESS_THRESHOLD 20
 #SECURITY_HAS_MAINT_ACCESS
 
 ## Uncomment to give everyone maint access.
-#EVERYONE_HAS_MAINT_ACCESS
+EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this to make security officers spawn in departmental security posts
 SEC_START_BRIG
@@ -263,8 +263,8 @@ ROUNDSTART_RACES human
 ## Races that are strictly worse than humans that could probably be turned on without balance concerns
 ROUNDSTART_RACES lizard
 #ROUNDSTART_RACES fly
-#ROUNDSTART_RACES plasmaman
-#ROUNDSTART_RACES shadow
+ROUNDSTART_RACES plasmaman
+ROUNDSTART_RACES shadow
 #ROUNDSTART_RACES shadowling
 
 ## Races that are better than humans in some ways, but worse in others
@@ -318,9 +318,11 @@ REACTIONARY_EXPLOSIONS
 ## Can be any number between 4 and 128, some examples are provided below.
 
 ## Default (3,7,14)
-BOMBCAP 14
+##BOMBCAP 14
 ## One 'step' up (4,8,16) (recommended if you enable REACTIONARY_EXPLOSIONS above)
 #BOMBCAP 16
+## Two steps up, pretty large bomb cap
+BOMBCAP 24
 ## LagHell (7,14,28)
 #BOMBCAP 28
 
