@@ -1,3 +1,8 @@
+
+/////////////
+//WINDBLADE//
+/////////////
+
 /obj/item/weapon/katana/windblade
 	name = "wind blade"
 	desc = "Go with the flow."
@@ -6,8 +11,8 @@
 	item_state = "windblade"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 21
-	throwforce = 15
+	force = 19
+	throwforce = 14
 	w_class = 4
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -22,23 +27,29 @@
 	var/aura = image('code/cactus/obj/obj.dmi', loc = src, icon_state = "[src.icon_state]_aura")
 	if(streak == 0)
 		overlays += aura
+		force = 19
 		armour_penetration = 0
 		..()
 		streak++
 	else if(streak == 1)
 		user.say(pick(phrase1))
-		armour_penetration = 20
+		force = 21
+		armour_penetration = 30
 		..()
 		streak++
-	else if(streak == 2)
-		user.say(pick(phrase2))
-		armour_penetration = 40
-		overlays -= aura
+		user << "Throw [src] to cast steel tempest!"
+
+/obj/item/weapon/katana/windblade/throw_at(atom/target,throw_range, throw_speed, mob/user)
+	if(streak >= 2)
+		steel_tempest(target, user)
+	else
 		..()
-		streak = 0
 
-/obj/item/weapon/katana/windblade/proc/steel_tempest(mob/target, mob/living/user)
 
+/obj/item/weapon/katana/windblade/proc/steel_tempest(atom/target, mob/living/user)
+	streak = 0
+	overlays = list(null)
+	user.say(pick(phrase2))
 
 /obj/item/weapon/katana/windblade/proc/dash(mob/user)
 	if(cooldown)
@@ -59,9 +70,22 @@
 /obj/item/weapon/katana/windblade/attack_self(mob/user)
 	dash(user)
 
+
+/obj/effect/proc_holder/spell/targeted/projectile/whirlwind
+	name = "whirlwind"
+	desc = "This spell summons whirlwinds to blow away your enemies."
+
+/obj/effect/proc_holder/spell/targeted/projectile/whirlwind/cast(list/targets)
+
+/obj/effect/proc_holder/spell/targeted/inflict_handler/whirlwind
+	amt_weakened = 2
+	sound = "sound/magic/MM_Hit.ogg"
+
 /obj/item/projectile/magic/whirlwind
 	icon = 'code/cactus/obj/obj.dmi'
 	icon_state = "whirlwind"
+	damage = 15
+	nodamage = 0
 
 /*
 	add_fingerprint(user)
