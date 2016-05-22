@@ -38,10 +38,13 @@
 		..()
 		streak++
 		user << "Throw [src] to cast steel tempest!"
+	else if(streak >= 2)
+		..()
 
 /obj/item/weapon/katana/windblade/throw_at(atom/target,throw_range, throw_speed, mob/user)
 	if(streak >= 2)
 		steel_tempest(target, user)
+		user.Click(src)
 	else
 		..()
 
