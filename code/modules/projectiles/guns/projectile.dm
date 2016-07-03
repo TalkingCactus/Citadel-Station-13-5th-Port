@@ -8,6 +8,7 @@
 
 	var/mag_type = /obj/item/ammo_box/magazine/m10mm //Removes the need for max_ammo and caliber info
 	var/obj/item/ammo_box/magazine/magazine
+	var/eject_mag = 0
 
 /obj/item/weapon/gun/projectile/New()
 	..()
@@ -61,6 +62,7 @@
 			magazine = AM
 			magazine.loc = src
 			user << "<span class='notice'>You load a new magazine into \the [src].</span>"
+			playsound(get_turf(src), 'sound/weapons/magload.ogg', 100, 1)
 			chamber_round()
 			A.update_icon()
 			update_icon()

@@ -39,8 +39,9 @@
 	projectile_type = /obj/item/projectile/candycorn
 
 /obj/item/projectile/candycorn
+	name = "candy corn"
 	damage = 0
-	stamina = 5
+	stamina = 1
 	icon_state = "ccorn"
 
 /obj/item/projectile/candycorn/on_hit(atom/target, blocked = 0, hit_zone)
@@ -78,3 +79,54 @@
 			user.take_organ_damage(5)
 			if(heavy_weapon)
 				user.take_organ_damage(10)
+/////////////
+//M1 GARAND//
+/////////////
+
+/obj/item/weapon/gun/projectile/automatic/m1garand
+	name = "\improper M1 Garand"
+	desc = "You're pretty sure this thing isn't an original."
+	icon_state = "m1garand"
+	item_state = "moistnugget"
+	origin_tech = "combat=3;materials=3"
+	mag_type = /obj/item/ammo_box/magazine/m3006
+	burst_size = 1
+	fire_sound = 'sound/weapons/sniper.ogg'
+	eject_mag = 1
+	action_button_name = null
+/obj/item/weapon/gun/projectile/automatic/m1garand/update_icon()
+	..()
+	icon_state = "m1garand"
+	if(zoomable)
+		icon_state = "m1garand-scoped"
+
+//obj/item/weapon/gun/projectile/automatic/m1garand/proc/eject_clip
+//	if(magazine &&
+
+/obj/item/weapon/gun/projectile/automatic/m1garand/scoped
+	name = "scoped M1 Garand"
+	icon_state = "m1garand-scoped"
+	desc = "You're pretty sure this thing isn't an original. There's some sort of optical enhancement apparatus on top."
+	zoomable = TRUE
+	zoom_amt = 7
+
+/obj/item/projectile/bullet/b3006
+	damage = 35
+
+/obj/item/ammo_casing/c3006
+	desc = "A .30-06 bullet casing."
+	caliber = ".30-06"
+	icon_state = "762-casing"
+	projectile_type = /obj/item/projectile/bullet/b3006
+
+/obj/item/ammo_box/magazine/m3006
+	name = ".30-06 rifle clip"
+	icon_state = "3006"
+	origin_tech = "combat=2"
+	ammo_type = /obj/item/ammo_casing/c3006
+	caliber = ".30-06"
+	max_ammo = 8
+
+/obj/item/ammo_box/magazine/m3006/update_icon()
+	..()
+	icon_state = "3006-[ammo_count() ? "8" : "0"]"
